@@ -1,36 +1,23 @@
 # Flex and Care
 
-A mobile-first visual concept for a Guam caregiver guidance and resource platform. The caregiver experience turns common questions into calm, source-backed next steps. A separate team workspace shows how nonprofit partners could review and maintain guidance before it is published.
+A meeting prototype for dementia caregiver navigation and local resources on Guam. It contains sample content awaiting partner review and is not a production medical service.
 
-## What the demo includes
+## Included
+- User-selected sample articles and keyword topic search (never an automatic answer to symptoms)
+- Explicit danger phrases show human-help routes; search cannot assess safety
+- A three-step starting plan including a path after diagnosis
+- Local reference directory with expandable preparation information
+- Printable plans without collecting or transmitting personal information
+- Public content-workspace mockup; no editing, authentication or publishing
+- Preview feedback is not saved or sent
 
-- Four curated caregiver questions based on the discovery conversation
-- A three-step caregiver plan builder with personalized next steps
-- A safe fallback for questions without approved guidance
-- Topic-based local resource directory with eligibility and preparation details
-- Always-available urgent routes for 911, Guam 988, and Adult Protective Services
-- A printable support-call plan that does not collect or send personal information
-- A separate content workspace showing ownership and publication status
-- Desktop and mobile browser coverage
+## Development
+Use Node 22.13 or later. `npm ci`, then `npm run dev -- --host 127.0.0.1 --port 5173 --strictPort`. Stop the exact owned process with Ctrl-C. Claim runtime resources with dev-lifecycle. `?team=1` opens the public mockup.
 
-## Run locally
+## Verification
+`npm run gate` runs lint, types, unit tests and production build. `npm run test:e2e` runs desktop/mobile browser acceptance with a task-owned preview server. See docs/MEETING_PROTOTYPE_ACCEPTANCE.md for manual acceptance and exclusions.
 
-```bash
-npm install
-npm run dev
-```
+## Deployment
+Netlify uses netlify.toml, main, npm run build and dist. The build writes release.json with its source commit. Intended meeting URL: https://care.shimizu-technology.com. The prototype is excluded from search indexing.
 
-Then open `http://localhost:5173`.
-
-Open `http://localhost:5173/?team=1` for the content-team workspace.
-
-## Verify
-
-```bash
-npm run gate
-npm run test:e2e
-```
-
-## Important
-
-The copy and resource records are discussion content, not a production knowledge base. Phone numbers, availability, eligibility, and service details must be confirmed by the responsible organizations before launch. The plan builder stores nothing and does not determine program eligibility.
+All provider contacts, eligibility, hours, guidance and source details require confirmation by the designated nonprofit and professional partners before a public service launch. HSP and other organizations are prospective partners until they agree. No unrestricted AI, database, user accounts, clinical certification or community forum is included.

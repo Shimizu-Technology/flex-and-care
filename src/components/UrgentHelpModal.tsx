@@ -42,12 +42,20 @@ export function UrgentHelpModal({ open, onClose }: UrgentHelpModalProps) {
 
   useEffect(() => {
     if (!open) return
+    const previousFocus = document.activeElement as HTMLElement | null
     closeButton.current?.focus()
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') onClose()
+      if (event.key === 'Tab') {
+        const focusable = Array.from(document.querySelectorAll<HTMLElement>('.urgent-modal button, .urgent-modal a'))
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+      }
     }
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    return () => { window.removeEventListener('keydown', handleKeyDown); previousFocus?.focus() }
   }, [open, onClose])
 
   if (!open) return null

@@ -1,4 +1,4 @@
-# CareGuide Guam — Demo PRD
+# Flex and Care — Meeting Prototype
 
 ## Purpose
 
@@ -6,7 +6,7 @@ Give Mrs. Therese a tangible way to react to a possible caregiver-support platfo
 
 ## Primary audience
 
-Family caregivers on Guam, especially people looking for understandable next steps while supporting an older adult or a person with a disability.
+Family caregivers on Guam supporting someone with dementia or Alzheimer’s. Related local resources remain available for other adult caregiving needs.
 
 ## Demo goals
 
@@ -17,14 +17,14 @@ Family caregivers on Guam, especially people looking for understandable next ste
 
 ## Included
 
-- Curated question matching
+- Explicit user-selected sample articles and keyword topic search
 - Three-question caregiver assessment and personalized starting plan
 - Guidance pathway with immediate actions
 - Guam resource directory organized by need, with expandable eligibility guidance
 - Urgent-help routing for medical danger, mental-health crisis, and vulnerable-adult safety
 - Printable plan and non-transmitting warm-handoff preview
-- Source and review metadata
-- Helpful/not-helpful feedback
+- Reference links and pending partner-review disclosures
+- Unsaved helpful/not-helpful feedback preview
 - Content review mockup
 
 ## Not included

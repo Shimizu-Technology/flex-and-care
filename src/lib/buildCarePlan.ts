@@ -3,7 +3,7 @@ import type { CareNeed, CarePlan, CareRecipient, CareUrgency, PlanAnswers } from
 const recipientLabels: Record<CareRecipient, string> = {
   'older-adult': 'an older adult',
   'adult-disability': 'an adult with a disability',
-  'young-person': 'a child or young person with a disability',
+  dementia: 'someone with dementia or Alzheimer’s',
   unsure: 'someone who needs support',
 }
 
@@ -15,9 +15,20 @@ const urgencyOpeners: Record<CareUrgency, string> = {
 }
 
 const plans: Record<CareNeed, Omit<CarePlan, 'summary' | 'urgent'>> = {
+  'new-diagnosis': {
+    eyebrow: 'After a dementia diagnosis',
+    title: 'Find your first next steps.',
+    steps: [
+      'Ask the diagnosing clinician for a written explanation, follow-up plan, and a contact for questions.',
+      'Write down the daily tasks and questions your family needs help with. Bring this list to the next appointment.',
+      'Contact caregiver support to ask about information, training, and local services. Confirm which services fit your situation.',
+    ],
+    prepare: ['Questions for the clinician', 'The follow-up appointment or contact', 'Daily support needs', 'Who can help in the family'],
+    resourceIds: ['hsp-caregiver', 'dphss-aging'],
+  },
   respite: {
     eyebrow: 'A break and backup care',
-    title: 'Start with a caregiver-support intake, then ask about the type of respite that fits your situation.',
+    title: 'Find a break and backup care.',
     steps: [
       'Describe when you need relief, for how long, and whether care should happen at home or in another setting.',
       'Ask the National Family Caregiver Support Program about current respite eligibility, availability, and wait times.',
@@ -28,7 +39,7 @@ const plans: Record<CareNeed, Omit<CarePlan, 'summary' | 'urgent'>> = {
   },
   'daily-care': {
     eyebrow: 'Support at home',
-    title: 'Begin with a needs conversation, then connect daily tasks to the right local program.',
+    title: 'Find help with daily care.',
     steps: [
       'List the daily activities that are becoming difficult, such as bathing, meals, housekeeping, supervision, or medication routines.',
       'Contact DPHSS Aging Services for case management, in-home services, meals, adult day care, or transportation if the person may qualify.',
@@ -39,7 +50,7 @@ const plans: Record<CareNeed, Omit<CarePlan, 'summary' | 'urgent'>> = {
   },
   transportation: {
     eyebrow: 'Getting to care and services',
-    title: 'Check paratransit eligibility and schedule needs before the next important appointment.',
+    title: 'Plan transportation to care.',
     steps: [
       'Write down the recurring destinations, appointment times, mobility equipment, and whether someone must travel with the rider.',
       'Review GRTA’s ADA paratransit application and ask which eligibility category fits the person’s functional needs.',
@@ -50,7 +61,7 @@ const plans: Record<CareNeed, Omit<CarePlan, 'summary' | 'urgent'>> = {
   },
   equipment: {
     eyebrow: 'Equipment and supplies',
-    title: 'Match the immediate need with loan, assistance, and supply options before purchasing on your own.',
+    title: 'Find equipment and supply contacts.',
     steps: [
       'Write down the exact item, size, and how it will be used at home, school, work, or in the community.',
       'Check GSAT’s equipment catalog for a demonstration or free short-term device loan.',
@@ -61,7 +72,7 @@ const plans: Record<CareNeed, Omit<CarePlan, 'summary' | 'urgent'>> = {
   },
   planning: {
     eyebrow: 'Benefits and future planning',
-    title: 'Separate the benefits, legal, and disability questions so each one reaches the right specialist.',
+    title: 'Prepare for benefits and future decisions.',
     steps: [
       'List the decisions you need help with: Medicare, disability services, savings, powers of attorney, advance directives, or guardianship.',
       'Use DPHSS Medicare Assistance or DISID as the first benefits-navigation route.',
@@ -72,7 +83,7 @@ const plans: Record<CareNeed, Omit<CarePlan, 'summary' | 'urgent'>> = {
   },
   safety: {
     eyebrow: 'Safety and protection',
-    title: 'Use the safest human route first. You do not need to solve a crisis alone.',
+    title: 'Get human help first.',
     steps: [
       'Call 911 if anyone is in immediate danger, severely injured, missing, or unable to breathe.',
       'Call or text 988 for a mental-health or emotional crisis.',
@@ -84,11 +95,11 @@ const plans: Record<CareNeed, Omit<CarePlan, 'summary' | 'urgent'>> = {
 }
 
 export function buildCarePlan(answers: PlanAnswers): CarePlan {
-  const base = plans[answers.need]
   const urgent = answers.urgency === 'immediate' || answers.need === 'safety'
+  const base = plans[urgent ? 'safety' : answers.need]
   return {
     ...base,
-    summary: `${urgencyOpeners[answers.urgency]} This starting plan is tailored for someone supporting ${recipientLabels[answers.recipient]}.`,
+    summary: `${urgencyOpeners[answers.urgency]} These sample starting steps are for a caregiver supporting ${recipientLabels[answers.recipient]}.`,
     urgent,
   }
 }

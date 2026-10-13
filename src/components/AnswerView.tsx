@@ -24,7 +24,7 @@ export function AnswerView({ answer, onBack }: AnswerViewProps) {
           <div className="answer-card__heading">
             <span className="answer-card__eyebrow">{answer.eyebrow}</span>
             <span className="answer-card__status">
-              <BadgeCheck size={15} /> Source-backed guidance
+              <BadgeCheck size={15} /> Sample guidance
             </span>
           </div>
           <p className="answer-card__question">“{answer.question}”</p>
@@ -49,9 +49,9 @@ export function AnswerView({ answer, onBack }: AnswerViewProps) {
           <section className="source-panel" aria-labelledby="sources-heading">
             <div className="section-kicker section-kicker--light">
               <span>02</span>
-              <h2 id="sources-heading">Why you can trust this answer</h2>
+              <h2 id="sources-heading">Reference links</h2>
             </div>
-            <p>This guidance is based on the sources below—not generated from the open internet.</p>
+            <p>These sources informed the sample. A designated partner still needs to approve the wording before public use.</p>
             <div className="source-list">
               {answer.sources.map((source) => (
                 <a key={source.url} href={source.url} target="_blank" rel="noreferrer">
@@ -66,15 +66,16 @@ export function AnswerView({ answer, onBack }: AnswerViewProps) {
             <div className="review-stamp">
               <BadgeCheck size={17} />
               <span>
-                <strong>Sources checked</strong>
-                {answer.reviewedBy} · {answer.reviewDate}
+                <strong>Awaiting partner review</strong>
+                Reference collection: {answer.reviewDate}
               </span>
             </div>
           </section>
 
+          <div className="concept-callout"><strong>Sample content</strong><p>{answer.note ?? "Final wording and local service details need partner approval."}</p></div>
           <div className="feedback-block">
             {feedback ? (
-              <p role="status">Thank you. Your feedback helps improve this guidance.</p>
+              <p role="status">Feedback selected for this preview. It is not saved or sent.</p>
             ) : (
               <>
                 <span>Did this point you in the right direction?</span>

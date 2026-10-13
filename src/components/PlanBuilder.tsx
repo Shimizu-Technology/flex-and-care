@@ -29,13 +29,14 @@ interface PlanBuilderProps {
 }
 
 const recipientOptions = [
+  { value: 'dementia' as const, title: 'Someone with dementia or Alzheimer’s', description: 'A family caregiver starting point', icon: HeartHandshake },
   { value: 'older-adult' as const, title: 'An older adult', description: 'Usually age 60 or older', icon: Users },
   { value: 'adult-disability' as const, title: 'An adult with a disability', description: 'Support at home or in the community', icon: Accessibility },
-  { value: 'young-person' as const, title: 'A child or young person', description: 'Disability or complex support needs', icon: HeartHandshake },
   { value: 'unsure' as const, title: 'I’m not sure', description: 'Help me find a starting point', icon: LifeBuoy },
 ]
 
 const needOptions = [
+  { value: 'new-diagnosis' as const, title: 'After a dementia diagnosis', icon: ClipboardList },
   { value: 'respite' as const, title: 'A break or respite', icon: CalendarClock },
   { value: 'daily-care' as const, title: 'Daily care at home', icon: Home },
   { value: 'transportation' as const, title: 'Transportation', icon: Truck },
@@ -64,6 +65,7 @@ export function PlanBuilder({ onBack, onUrgentHelp }: PlanBuilderProps) {
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' })
       document.getElementById('main-content')?.focus({ preventScroll: true })
     })
     return () => window.cancelAnimationFrame(frame)
@@ -86,7 +88,7 @@ export function PlanBuilder({ onBack, onUrgentHelp }: PlanBuilderProps) {
       <main className="plan-result-shell" id="main-content" tabIndex={-1}>
         <div className="plan-result__topline">
           <button className="back-button" type="button" onClick={onBack}><ArrowLeft size={17} /> Back to questions</button>
-          <span><Sparkles size={15} /> Your caregiver support plan</span>
+          <span><Sparkles size={15} /> Sample caregiver starting plan</span>
         </div>
 
         <div className="plan-result-layout">
@@ -141,7 +143,7 @@ export function PlanBuilder({ onBack, onUrgentHelp }: PlanBuilderProps) {
           <aside className="plan-resources" aria-label="Recommended Guam resources">
             <div className="sidebar-heading"><span>Your best starting points</span><h2>Who to contact</h2></div>
             {recommendedResources.map((resource) => <ResourceCard key={resource.id} resource={resource} compact />)}
-            <p className="plan-disclaimer">This plan does not determine eligibility or replace professional advice. Confirm current details directly with each organization.</p>
+            <p className="plan-disclaimer">Sample plan awaiting partner review. It does not determine eligibility or replace professional advice. Confirm current details directly with each organization.</p>
           </aside>
         </div>
       </main>
@@ -196,7 +198,7 @@ export function PlanBuilder({ onBack, onUrgentHelp }: PlanBuilderProps) {
           {step === 2 && (
             <fieldset className="plan-question">
               <legend>How soon do you need help?</legend>
-              <p>This changes the order of the next steps—not whether someone deserves help.</p>
+              <p>Immediate danger opens safety contacts. Other choices help describe the timing of your support call.</p>
               <div className="plan-option-grid">
                 {urgencyOptions.map((option) => (
                   <button key={option.value} type="button" className={urgency === option.value ? 'selected' : ''} onClick={() => setUrgency(option.value)} aria-pressed={urgency === option.value}>

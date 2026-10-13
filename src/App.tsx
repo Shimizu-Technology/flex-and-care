@@ -1,29 +1,23 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnswerView } from './components/AnswerView'
 import { AskView } from './components/AskView'
-import { FallbackView } from './components/FallbackView'
+import { GuidanceSearchView } from './components/GuidanceSearchView'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { PlanBuilder } from './components/PlanBuilder'
 import { ResourcesView } from './components/ResourcesView'
 import { ReviewView } from './components/ReviewView'
 import { UrgentHelpModal } from './components/UrgentHelpModal'
-import { matchGuidance } from './lib/matchGuidance'
+import { hasExplicitDanger, searchGuidance } from './lib/matchGuidance'
 import type { Guidance, View } from './types'
 
-type Result = { question: string; answer: Guidance | null } | null
+type Result = { question: string; matches: Guidance[]; urgent: boolean; answer?: Guidance } | null
 
 export default function App() {
   const [view, setView] = useState<View>(() => new URLSearchParams(window.location.search).get('team') === '1' ? 'review' : 'ask')
   const [result, setResult] = useState<Result>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [query, setQuery] = useState('')
   const [urgentHelpOpen, setUrgentHelpOpen] = useState(false)
-  const searchTimer = useRef<number | null>(null)
-
-  useEffect(() => () => {
-    if (searchTimer.current) window.clearTimeout(searchTimer.current)
-  }, [])
-
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       document.getElementById('main-content')?.focus({ preventScroll: true })
@@ -32,21 +26,15 @@ export default function App() {
   }, [view, result])
 
   function navigate(nextView: View) {
-    if (searchTimer.current) window.clearTimeout(searchTimer.current)
-    setIsLoading(false)
     setView(nextView)
     if (nextView !== 'ask') setResult(null)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   function askQuestion(question: string) {
-    setIsLoading(true)
-    if (searchTimer.current) window.clearTimeout(searchTimer.current)
-    searchTimer.current = window.setTimeout(() => {
-      setResult({ question, answer: matchGuidance(question) })
-      setIsLoading(false)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 550)
+    setQuery(question)
+    setResult({ question, matches: searchGuidance(question), urgent: hasExplicitDanger(question) })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   function resetQuestion() {
@@ -61,6 +49,11 @@ export default function App() {
     navigate('ask')
   }
 
+  function chooseAnswer(answer: Guidance) {
+    setResult({ question: answer.question, matches: [], urgent: false, answer })
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
   const teamMode = view === 'review'
 
   return (
@@ -68,13 +61,13 @@ export default function App() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="demo-ribbon">
         <span>{teamMode ? 'Content workspace preview' : 'Visual concept'}</span>
-        {teamMode ? 'Private content-management preview' : 'Program details should be confirmed directly with the listed organization'}
+        {teamMode ? 'Public mockup — no editing or publishing' : 'Sample content awaiting partner review. Confirm services directly.'}
       </div>
       <Header view={view} onNavigate={navigate} onUrgentHelp={() => setUrgentHelpOpen(true)} teamMode={teamMode} onOpenCaregiver={openCaregiverExperience} />
-      {view === 'ask' && !result && <AskView onAsk={askQuestion} onBuildPlan={() => navigate('plan')} isLoading={isLoading} />}
+      {view === 'ask' && !result && <AskView onAsk={askQuestion} onChoose={chooseAnswer} onBuildPlan={() => navigate('plan')} isLoading={false} initialQuestion={query} />}
       {view === 'ask' && result?.answer && <AnswerView answer={result.answer} onBack={resetQuestion} />}
       {view === 'ask' && result && !result.answer && (
-        <FallbackView question={result.question} onBack={resetQuestion} onResources={() => navigate('resources')} />
+        <GuidanceSearchView question={result.question} matches={result.matches} urgent={result.urgent} onChoose={chooseAnswer} onBack={resetQuestion} onResources={() => navigate('resources')} onUrgentHelp={() => setUrgentHelpOpen(true)} />
       )}
       {view === 'resources' && <ResourcesView />}
       {view === 'review' && <ReviewView />}

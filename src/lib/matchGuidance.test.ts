@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest'
-import { matchGuidance, normalizeQuestion } from './matchGuidance'
+import { hasExplicitDanger, normalizeQuestion, searchGuidance } from './matchGuidance'
 
-describe('matchGuidance', () => {
+describe('caregiver article search', () => {
   it('normalizes punctuation and whitespace', () => {
     expect(normalizeQuestion('  Respite, care? ')).toBe('respite care')
   })
-
-  it('matches a known question exactly', () => {
-    expect(matchGuidance('Where can I find adult diapers on Guam?')?.id).toBe('supplies')
+  it('returns topics for the user to choose', () => {
+    expect(searchGuidance('Where can I find adult diapers on Guam?').map((item) => item.id)).toContain('supplies')
   })
-
-  it('matches plain-language keywords', () => {
-    expect(matchGuidance('My dad gets agitated every evening')?.id).toBe('late-day-agitation')
+  it('does not match rest inside arrest', () => {
+    expect(searchGuidance('My father is in cardiac arrest')).toEqual([])
   })
-
-  it('returns null when no approved guidance exists', () => {
-    expect(matchGuidance('Can you complete my tax return?')).toBeNull()
+  it.each(['My dad with dementia cannot breathe', 'My father is in cardiac arrest', "He can’t breathe", 'My mother is missing', 'My dad with dementia is unable to breathe', 'My dad is unresponsive'])('recognizes explicit danger: %s', (question) => {
+    expect(hasExplicitDanger(question)).toBe(true)
+  })
+  it('returns an empty list for unsupported topics', () => {
+    expect(searchGuidance('Can you complete my tax return?')).toEqual([])
   })
 })

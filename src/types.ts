@@ -68,8 +68,8 @@ export interface ValueCard {
   icon: LucideIcon
 }
 
-export type CareRecipient = 'older-adult' | 'adult-disability' | 'young-person' | 'unsure'
-export type CareNeed = 'respite' | 'daily-care' | 'transportation' | 'equipment' | 'planning' | 'safety'
+export type CareRecipient = 'dementia' | 'older-adult' | 'adult-disability' | 'unsure'
+export type CareNeed = 'new-diagnosis' | 'respite' | 'daily-care' | 'transportation' | 'equipment' | 'planning' | 'safety'
 export type CareUrgency = 'planning' | 'this-week' | 'today' | 'immediate'
 
 export interface PlanAnswers {

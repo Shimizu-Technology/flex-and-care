@@ -1,25 +1,23 @@
-# Build Plan
+# Product delivery stages
 
-## Phase 1 — Visual concept
+These are engineering stages, not replacements for the August 28 commercial proposal.
 
-- Public mobile-first experience
-- Curated guidance only
-- Guided plan builder with no stored personal information
-- Topic-based local resource directory
-- Urgent safety routes and a warm-handoff preview
-- Editorial review mockup
-- No login, backend, or live AI
+## Meeting prototype (current)
+- Dementia caregiver starting path and sample articles
+- Explicit article-choice search; no automatic symptom answer
+- Local reference directory and urgent human-help contacts
+- No stored personal information or transmitted feedback
+- Public editorial mockup with pending partner approvals
 
-## Phase 2 — Validated pilot
+## Public resource hub (proposal Phase 1)
+- Confirm sponsoring organization, branding and content owners
+- Publish up to 20 approved Q&As and 20 confirmed resource listings
+- One agreed guided path, deployment and team handoff
+- No AI, accounts, forum or custom admin system
 
-- Confirm nonprofit owner and partner organizations
-- Build and approve the first 25–50 guidance records
-- Add a small content-management workflow
-- Capture anonymous search gaps and usefulness feedback
+## AI pilot (proposal Phase 2, separate approval)
+- Reviewed source library, controlled assistant and administration
+- Feedback/reporting and approved safety rules
+- Separate funding, acceptance and ongoing operating agreement
 
-## Phase 3 — Assisted answers
-
-- Add retrieval over the approved knowledge base
-- Preserve citations and content versioning
-- Escalate unsupported or high-risk questions
-- Complete privacy, accessibility, and safety review before public launch
+Accounts, community and broader expansion remain separately scoped.

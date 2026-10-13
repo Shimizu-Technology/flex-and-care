@@ -20,7 +20,7 @@ export function ReviewView() {
         <div>
           <span><BookOpenCheck size={16} /> Flex and Care content workspace</span>
           <h1>Keep every answer current, sourced, and accountable.</h1>
-          <p>Review, approve, and maintain caregiver guidance with trusted community partners.</p>
+          <p>This public mockup shows a possible review process. It cannot edit or publish content, and the proposed owners have not approved these samples.</p>
         </div>
         <div className="review-metric">
           <strong>{reviewRecords.length}</strong>
@@ -63,8 +63,8 @@ export function ReviewView() {
           </div>
 
           <div className="review-detail__meta">
-            <div><Users size={18} /><span><small>Content owner</small><strong>{activeRecord.owner}</strong></span></div>
-            <div><Clock3 size={18} /><span><small>Last reviewed</small><strong>{activeRecord.lastReviewed}</strong></span></div>
+            <div><Users size={18} /><span><small>Proposed content owner</small><strong>{activeRecord.owner}</strong></span></div>
+            <div><Clock3 size={18} /><span><small>Sample record date</small><strong>{activeRecord.lastReviewed}</strong></span></div>
             <div><FileSearch size={18} /><span><small>Source records</small><strong>{activeRecord.sourceCount} linked</strong></span></div>
           </div>
 
@@ -75,11 +75,11 @@ export function ReviewView() {
               <li className="complete"><Check size={16} /><span><strong>Source link attached</strong>Readers can open the responsible organization</span></li>
               <li className={isPublished ? 'complete' : undefined}>
                 {isPublished ? <Check size={16} /> : <Clock3 size={16} />}
-                <span><strong>Partner accuracy review</strong>{isPublished ? 'Wording, service details, and escalation path confirmed' : 'Confirm wording, service details, and escalation path'}</span>
+                <span><strong>Partner accuracy review</strong>{isPublished ? 'Example of completed partner review' : 'Confirm wording, service details, and escalation path'}</span>
               </li>
               <li className={isPublished ? 'complete' : undefined}>
                 {isPublished ? <Check size={16} /> : <Clock3 size={16} />}
-                <span><strong>Next review date</strong>{isPublished ? 'Owner and review reminder are scheduled' : 'Set an owner and reminder before publishing'}</span>
+                <span><strong>Next review date</strong>{isPublished ? 'Example of an owner and review reminder' : 'Set an owner and reminder before publishing'}</span>
               </li>
             </ul>
           </div>
