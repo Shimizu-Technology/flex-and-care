@@ -755,3 +755,18 @@ main[tabindex='-1']:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Meeting prototype: concise result headings and explicit topic selection. */
+.search-results-shell { max-width: 960px; margin: 0 auto; padding: 30px 28px 80px; }
+.search-results-card { padding: 30px; background: var(--paper); border: 1px solid var(--line); }
+.search-results-card h1 { font-family: Georgia, serif; font-size: clamp(30px, 4vw, 46px); font-weight: 400; }
+.search-query { overflow-wrap: anywhere; }
+.topic-matches { display: grid; gap: 12px; margin: 24px 0; }
+.topic-matches button { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 18px; text-align: left; background: var(--cream); border: 1px solid var(--line); color: var(--ink); }
+.topic-matches small { display: block; margin-top: 8px; color: var(--muted); }
+@media (max-width: 680px) {
+  .search-results-shell { padding: 20px 14px 70px; }
+  .search-results-card { padding: 22px 20px; }
+  .answer-card h1, .care-plan__heading h1 { font-size: 32px; line-height: 1.15; }
+  .care-plan__heading { padding: 24px 20px; }
+}

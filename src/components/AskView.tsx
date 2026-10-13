@@ -2,15 +2,18 @@ import { ArrowRight, CheckCircle2, ClipboardList, MessageCircleQuestion, Search,
 import type { FormEvent } from 'react'
 import { useState } from 'react'
 import { guidance, valueCards } from '../data/careGuidance'
+import type { Guidance } from '../types'
 
 interface AskViewProps {
   onAsk: (question: string) => void
+  onChoose: (answer: Guidance) => void
   onBuildPlan: () => void
   isLoading: boolean
+  initialQuestion: string
 }
 
-export function AskView({ onAsk, onBuildPlan, isLoading }: AskViewProps) {
-  const [question, setQuestion] = useState('')
+export function AskView({ onAsk, onChoose, onBuildPlan, isLoading, initialQuestion }: AskViewProps) {
+  const [question, setQuestion] = useState(initialQuestion)
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -24,10 +27,10 @@ export function AskView({ onAsk, onBuildPlan, isLoading }: AskViewProps) {
         <div className="hero__orb hero__orb--two" aria-hidden="true" />
         <div className="hero__content">
           <div className="concept-label">
-            <Sparkles size={15} /> Guam caregiver guidance
+            <Sparkles size={15} /> Dementia caregiver support on Guam
           </div>
           <h1>Caregiving is hard.<br /><em>Finding help shouldn’t be.</em></h1>
-          <p className="hero__lede">Ask a real question. Get a clear next step, a local resource, and the source behind the guidance.</p>
+          <p className="hero__lede">Find a starting point for dementia caregiving, explore local help, and prepare for a conversation with a professional.</p>
 
           <form className="ask-box" onSubmit={handleSubmit}>
             <label htmlFor="care-question">What do you need help with today?</label>
@@ -42,14 +45,14 @@ export function AskView({ onAsk, onBuildPlan, isLoading }: AskViewProps) {
               />
               <button type="submit" disabled={!question.trim() || isLoading}>
                 {isLoading ? <span className="loading-dot" aria-label="Finding guidance" /> : <Search size={19} />}
-                <span>{isLoading ? 'Checking…' : 'Find guidance'}</span>
+                <span>{isLoading ? 'Searching…' : 'Search topics'}</span>
               </button>
             </div>
           </form>
 
           <button className="guided-entry" type="button" onClick={onBuildPlan}>
             <ClipboardList size={20} />
-            <span><strong>Not sure what to ask?</strong> Build a simple caregiver plan</span>
+            <span><strong>Not sure where to begin?</strong> Build a simple caregiver plan</span>
             <small>About 2 minutes</small>
             <ArrowRight size={17} />
           </button>
@@ -58,7 +61,7 @@ export function AskView({ onAsk, onBuildPlan, isLoading }: AskViewProps) {
             <span>Common caregiver questions</span>
             <div>
               {guidance.map((item) => (
-                <button key={item.id} type="button" onClick={() => onAsk(item.question)} disabled={isLoading}>
+                <button key={item.id} type="button" onClick={() => onChoose(item)} disabled={isLoading}>
                   {item.question} <ArrowRight size={15} />
                 </button>
               ))}
@@ -69,8 +72,8 @@ export function AskView({ onAsk, onBuildPlan, isLoading }: AskViewProps) {
         <aside className="trust-card">
           <span className="trust-card__number">01</span>
           <ShieldCheck size={30} />
-          <h2>Clear guidance, backed by sources</h2>
-          <p>Answers are built from information that can be reviewed and kept current.</p>
+          <h2>A starting point you can check</h2>
+          <p>This prototype shows how partner-reviewed guidance could work. Its sample content still needs approval.</p>
           <ul>
             <li><CheckCircle2 size={17} /> Clear, practical steps</li>
             <li><CheckCircle2 size={17} /> Local resource handoffs</li>

@@ -26,3 +26,8 @@ Run `npm run gate` after changes. For visible changes, also run Playwright and i
 ## Git
 
 Do not commit, push, or deploy unless Leon explicitly asks.
+
+## Runtime and delivery
+Start: npm run dev -- --host 127.0.0.1 --port <owned-port> --strictPort. Stop only the claimed process. No services are intentionally persistent. Use dev-lifecycle for all new servers, browsers and workers.
+Complete gate: npm run gate plus npm run test:e2e and manual affected-flow acceptance. CodeRabbit is advisory; unavailable review requires independent final-diff review and passing gates.
+Canonical project: Shimizu-Technology/flex-and-care. Integrate via PR to main. Publish only a reviewed prototype; sample status remains visible.

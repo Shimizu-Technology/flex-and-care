@@ -6,3 +6,7 @@ playwright-report
 coverage
 *.local
 
+
+.netlify/
+.codex/
+*.tsbuildinfo

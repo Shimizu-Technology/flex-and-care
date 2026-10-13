@@ -158,7 +158,7 @@ export const guidance: Guidance[] = [
       { label: 'Caregiver program overview', organization: 'Health Services of the Pacific', url: 'https://www.hspguam.com/national-family-caregiver-support-program' },
       { label: 'Disability services entry point', organization: 'Government of Guam DISID', url: 'https://disid.guam.gov/' },
     ],
-    reviewedBy: 'Flex and Care content team',
+    reviewedBy: 'Partner approval pending',
     reviewDate: 'August 2026',
     note: 'A production version could add a partner-maintained list of suppliers without promising live inventory.',
   },
@@ -181,7 +181,7 @@ export const guidance: Guidance[] = [
       { label: 'Dementia caregiving resources', organization: 'National Institute on Aging', url: 'https://www.nia.nih.gov/health/alzheimers-changes-behavior-and-communication/coping-agitation-aggression-and-sundowning' },
       { label: 'Local caregiver support', organization: 'Health Services of the Pacific', url: 'https://www.hspguam.com/national-family-caregiver-support-program' },
     ],
-    reviewedBy: 'Flex and Care content team',
+    reviewedBy: 'Partner approval pending',
     reviewDate: 'August 2026',
     note: 'This is general education, not a diagnosis. Clinical partners should review the final wording before launch.',
   },
@@ -203,7 +203,7 @@ export const guidance: Guidance[] = [
       { label: 'Official agency website', organization: 'Government of Guam DISID', url: 'https://disid.guam.gov/' },
       { label: 'Program description', organization: 'Health Services of the Pacific', url: 'https://www.hspguam.com/national-family-caregiver-support-program' },
     ],
-    reviewedBy: 'Flex and Care content team',
+    reviewedBy: 'Partner approval pending',
     reviewDate: 'August 2026',
     note: 'Eligibility and funding can change. A live service must show the partner-confirmed review date on each program record.',
   },
@@ -225,7 +225,7 @@ export const guidance: Guidance[] = [
     sources: [
       { label: 'Respite and caregiver support description', organization: 'Health Services of the Pacific', url: 'https://www.hspguam.com/national-family-caregiver-support-program' },
     ],
-    reviewedBy: 'Flex and Care content team',
+    reviewedBy: 'Partner approval pending',
     reviewDate: 'August 2026',
     note: 'A pilot should verify active providers and intake capacity with partners before listing specific respite openings.',
   },
@@ -234,17 +234,17 @@ export const guidance: Guidance[] = [
 export const reviewRecords: ReviewRecord[] = [
   { id: 'supplies', title: 'Finding adult briefs and supplies', category: 'Care supplies', owner: 'Community resource editor', status: 'Needs review', lastReviewed: 'Aug 14, 2026', sourceCount: 2 },
   { id: 'late-day-agitation', title: 'Responding to late-day agitation', category: 'Dementia caregiving', owner: 'Clinical content partner', status: 'Draft', lastReviewed: 'Aug 12, 2026', sourceCount: 2 },
-  { id: 'government-assistance', title: 'Navigating Guam support programs', category: 'Benefits navigation', owner: 'Community resource editor', status: 'Published', lastReviewed: 'Aug 16, 2026', sourceCount: 2 },
+  { id: 'government-assistance', title: 'Navigating Guam support programs', category: 'Benefits navigation', owner: 'Community resource editor', status: 'Needs review', lastReviewed: 'Aug 16, 2026', sourceCount: 2 },
   { id: 'respite', title: 'Finding respite care', category: 'Caregiver wellbeing', owner: 'Caregiver services partner', status: 'Needs review', lastReviewed: 'Aug 15, 2026', sourceCount: 1 },
   { id: 'transportation', title: 'Navigating ADA paratransit', category: 'Transportation', owner: 'Mobility services partner', status: 'Needs review', lastReviewed: 'Aug 17, 2026', sourceCount: 1 },
-  { id: 'urgent-help', title: 'Routing urgent and safety concerns', category: 'Safety escalation', owner: 'Safety content partner', status: 'Published', lastReviewed: 'Aug 17, 2026', sourceCount: 3 },
+  { id: 'urgent-help', title: 'Routing urgent and safety concerns', category: 'Safety escalation', owner: 'Safety content partner', status: 'Needs review', lastReviewed: 'Aug 17, 2026', sourceCount: 3 },
 ]
 
 export const valueCards: ValueCard[] = [
   { title: 'Plain-language guidance', copy: 'Answers begin with what a caregiver can do next—not a maze of agency names.', icon: HeartHandshake },
   { title: 'Local routes to help', copy: 'Guam organizations appear inside the answer, at the moment they are useful.', icon: Landmark },
   { title: 'Accessible by design', copy: 'Large type, simple choices, and a calm mobile experience support stressful moments.', icon: Accessibility },
-  { title: 'A safe handoff', copy: 'High-risk questions and urgent situations route people to human help.', icon: PhoneCall },
+  { title: 'Human help is close by', copy: 'Urgent-help contacts stay available. This prototype cannot assess symptoms or emergencies.', icon: PhoneCall },
 ]
 
 export const demoQuestions = guidance.map((item) => item.question)

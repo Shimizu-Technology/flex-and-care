@@ -13,7 +13,7 @@ export function ResourceCard({ resource, compact = false }: ResourceCardProps) {
         <span className="resource-card__category">{resource.category}</span>
         {resource.verified && (
           <span className="verified-label">
-            <BadgeCheck size={14} /> Official source
+            <BadgeCheck size={14} /> Reference link
           </span>
         )}
       </div>
