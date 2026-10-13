@@ -59,10 +59,6 @@ export default function App() {
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <div className="demo-ribbon">
-        <span>{teamMode ? 'Content workspace preview' : 'Visual concept'}</span>
-        {teamMode ? 'Public mockup — no editing or publishing' : 'Sample content awaiting partner review. Confirm services directly.'}
-      </div>
       <Header view={view} onNavigate={navigate} onUrgentHelp={() => setUrgentHelpOpen(true)} teamMode={teamMode} onOpenCaregiver={openCaregiverExperience} />
       {view === 'ask' && !result && <AskView onAsk={askQuestion} onChoose={chooseAnswer} onBuildPlan={() => navigate('plan')} isLoading={false} initialQuestion={query} />}
       {view === 'ask' && result?.answer && <AnswerView answer={result.answer} onBack={resetQuestion} />}
